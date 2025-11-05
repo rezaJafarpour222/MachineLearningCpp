@@ -5,7 +5,7 @@
 #include <random>
 using namespace std;
 Eigen::MatrixXd buildMatrix(int seed, double mean, double stdev, int n, int set_type = 0, double diff = 0) {
-  mt19937 gen(42); // Seed
+  mt19937 gen(seed); // Seed
   normal_distribution<double> dist_x1(mean, stdev);
   normal_distribution<double> dist_x2(mean, stdev);
   Eigen::VectorXd x1(n), x2(n), type(n);

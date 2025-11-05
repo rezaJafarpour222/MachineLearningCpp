@@ -11,5 +11,6 @@ int main() {
   Eigen::MatrixXd ds1 = buildMatrix(42, mean, stdev, number, 0);
   Eigen::MatrixXd ds2 = buildMatrix(123, mean, stdev, number, 1, diff);
   Eigen::MatrixXd fullShuffledDs = MergeAndShuffle(ds1, ds2, 1000);
-  cout << "Shuffled data set" << fullShuffledDs.topRows(20);
+  cout << "Shuffled data set====>>" << endl;
+  cout << fullShuffledDs.topRows(20);
 }
