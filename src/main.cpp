@@ -1,4 +1,5 @@
 #include "matrixBuilder.h"
+#include "perceptron.h"
 #include <Eigen/Dense>
 #include <iostream>
 #include <random>
@@ -8,9 +9,12 @@ int main() {
   int number = 1000;
   double stdev = 0.1;
   double diff = 0.35;
+  double learningRate = 0.005;
   Eigen::MatrixXd ds1 = buildMatrix(42, mean, stdev, number, 0);
   Eigen::MatrixXd ds2 = buildMatrix(123, mean, stdev, number, 1, diff);
   Eigen::MatrixXd fullShuffledDs = MergeAndShuffle(ds1, ds2, 1000);
-  cout << "Shuffled data set====>>" << endl;
-  cout << fullShuffledDs.topRows(20);
+  Perceptron perceptron(1, 0.1, 0.1);
+  Eigen::MatrixXd data = fullShuffledDs.leftCols(fullShuffledDs.cols() - 1);
+  Eigen::MatrixXd label = fullShuffledDs.rightCols(1);
+  perceptron.Fit(data, label, 2, learningRate);
 }
