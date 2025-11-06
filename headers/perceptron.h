@@ -16,7 +16,7 @@ public:
 
   int Predict(double x1, double x2) const;
   double PredictBoundary(double input) const;
-  void Fit(const Eigen::MatrixXd &data, const Eigen::MatrixXd &label, int epochs, double lr);
+  void Fit(const Eigen::MatrixXd &fullData, int epochs, double lr);
 };
 
 #endif

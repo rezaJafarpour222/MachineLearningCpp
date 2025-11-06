@@ -14,7 +14,5 @@ int main() {
   Eigen::MatrixXd ds2 = buildMatrix(123, mean, stdev, number, 1, diff);
   Eigen::MatrixXd fullShuffledDs = MergeAndShuffle(ds1, ds2, 1000);
   Perceptron perceptron(1, 0.1, 0.1);
-  Eigen::MatrixXd data = fullShuffledDs.leftCols(fullShuffledDs.cols() - 1);
-  Eigen::MatrixXd label = fullShuffledDs.rightCols(1);
-  perceptron.Fit(data, label, 2, learningRate);
+  perceptron.Fit(fullShuffledDs, 2, learningRate);
 }

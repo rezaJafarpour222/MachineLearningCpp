@@ -1,5 +1,4 @@
 #include "perceptron.h"
-
 using namespace std;
 
 int Perceptron::StepFunction(double z) const {
@@ -22,15 +21,18 @@ double Perceptron::PredictBoundary(double input) const {
   return -(w1 * input + w0) / w2;
 }
 
-void Perceptron::Fit(const Eigen::MatrixXd &data, const Eigen::MatrixXd &label, int epochs, double lr) {
+void Perceptron::Fit(const Eigen::MatrixXd &fullData, int epochs, double lr) {
+  Eigen::MatrixXd data = fullData.leftCols(fullData.cols() - 1);
+  Eigen::MatrixXd label = fullData.rightCols(1);
   vector<int> errors;
   for (int epoch = 0; epoch < epochs; epoch++) {
     int error = 0;
     for (int i = 0; i < data.rows(); i++) {
       double x = data(i, 0);
       double y = data(i, 1);
-      double category = label(i, 0); // Ensure correct indexing
+      double category = label(i, 0);
       double update = lr * (category - Predict(x, y));
+
       w0 += update;
       w1 += update * x;
       w2 += update * y;
